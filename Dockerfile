@@ -8,5 +8,6 @@ RUN yum -y update && \
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf && \
     echo "nginx on hpess" > /usr/share/nginx/html/index.html
 
-ADD nginx.service.conf /etc/supervisord.d/nginx.service.conf
 EXPOSE 80
+
+COPY services/* /etc/supervisord.d/
