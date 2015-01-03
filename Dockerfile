@@ -13,8 +13,8 @@ RUN nginxVersion="1.7.9" && \
     ln -sf nginx-$nginxVersion nginx && \
     cd nginx && \
     ./configure \
-      --user=hpess                          \
-      --group=hpess                         \
+      --user=docker                          \
+      --group=docker                         \
       --prefix=/etc/nginx                   \
       --sbin-path=/usr/sbin/nginx           \
       --conf-path=/etc/nginx/nginx.conf     \
@@ -38,9 +38,9 @@ RUN nginxVersion="1.7.9" && \
 # Setup directories and ownership, as well as allowing nginx to bind to low ports
 RUN mkdir -p /var/log/nginx && \
     mkdir -p /var/run/nginx && \
-    chown -R hpess:hpess /var/log/nginx && \
-    chown -R hpess:hpess /var/run/nginx && \
-    chown -R hpess:hpess /etc/nginx && \
+    chown -R docker:docker /var/log/nginx && \
+    chown -R docker:docker /var/run/nginx && \
+    chown -R docker:docker /etc/nginx && \
     setcap 'cap_net_bind_service=+ep' /usr/sbin/nginx
 
 EXPOSE 80
