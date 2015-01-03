@@ -1,0 +1,10 @@
+nginx:
+  hostname: 'nginx'
+  image: hpess/nginx
+  environment:
+    DEBUG: 'true'
+  ports:
+    - "8080:80"
+    - "8443:443"
+  volumes:
+    - ./storage:/storage
