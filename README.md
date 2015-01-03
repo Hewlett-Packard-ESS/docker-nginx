@@ -1,8 +1,27 @@
-## hpess/ngninx
+# hpess/ngninx
 This container builds on hpess/chef by adding nginx.
 
+## Specifics
+  - Nginx is build from source, and is using version 1.7.9 (Mainline).
+  - Nginx configuration is stored in the volume /storage, if you mount an empty directory from your host to /storage, chef-zero is used to perform initial surface level configuration which will created the config files for you.  This will only be done if the files do not exist, therefore preserving and customisation you made add.
+  - Just for ease, you can have chef-zero create a simple http:80 bound site for you, where the contents live in /storage/nginx/html.  Use the 'nginx_simple_http' flag below.
+  - Nginx runs as the "hpess" user in the "hpess" group, which is created from the hpess/base image.  Subsequently you need to ensure that if you modify /storage/ outside of the container, you set the userid to 1250 and groupid to 1250, otherwise nginx in the container will not have permission to read those files.
+
 ## Use
-Default install of nginx exposing port 80.
+The easiest way is probably with a fig file, like this:
+```
+nginx:
+  hostname: 'nginx'
+  image: hpess/nginx
+  environment:
+    DEBUG: 'true'  // Used in HPESS images to give more information
+    nginx_simple_http: 'true'
+  ports:
+    - "8080:80"
+    - "8443:443"   // SSL not currently implemented, coming soon...
+  volumes:
+    - ./storage:/storage
+```
 
 ## License
 This application is distributed under the MIT License (MIT)
