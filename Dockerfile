@@ -51,4 +51,6 @@ ENV chef_run_list nginx
 
 COPY services/* /etc/supervisord.d/
 COPY cookbooks/ /chef/cookbooks/
+COPY preboot/* /preboot/
+
 ENV HPESS_ENV nginx
