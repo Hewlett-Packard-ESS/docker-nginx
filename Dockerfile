@@ -15,11 +15,11 @@ RUN nginxVersion="1.7.9" && \
     ./configure \
       --user=docker                          \
       --group=docker                         \
-      --prefix=/etc/nginx                   \
+      --prefix=/usr/share/nginx                   \
       --sbin-path=/usr/sbin/nginx           \
       --conf-path=/etc/nginx/nginx.conf     \
-      --pid-path=/var/run/nginx.pid         \
-      --lock-path=/var/run/nginx.lock       \
+      --pid-path=/var/run/nginx/nginx.pid         \
+      --lock-path=/var/run/nginx/nginx.lock       \
       --error-log-path=/var/log/nginx/error.log \
       --http-log-path=/var/log/nginx/access.log \
       --with-http_gzip_static_module        \
@@ -38,9 +38,11 @@ RUN nginxVersion="1.7.9" && \
 # Setup directories and ownership, as well as allowing nginx to bind to low ports
 RUN mkdir -p /var/log/nginx && \
     mkdir -p /var/run/nginx && \
+    mkdir -p /usr/share/nginx && \
     chown -R docker:docker /var/log/nginx && \
     chown -R docker:docker /var/run/nginx && \
     chown -R docker:docker /etc/nginx && \
+    chown -R docker:docker /usr/share/nginx && \
     setcap 'cap_net_bind_service=+ep' /usr/sbin/nginx
 
 EXPOSE 80
