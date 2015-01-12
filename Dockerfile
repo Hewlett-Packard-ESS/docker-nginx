@@ -51,6 +51,7 @@ EXPOSE 443
 ENV chef_node_name nginx.docker.local
 ENV chef_run_list nginx 
 
+COPY storage/ /storage/
 COPY services/* /etc/supervisord.d/
 COPY cookbooks/ /chef/cookbooks/
 COPY preboot/* /preboot/
