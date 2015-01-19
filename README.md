@@ -17,8 +17,8 @@ nginx:
     DEBUG: 'true'  // Used in HPESS images to give more information
     nginx_simple_http: 'true'
   ports:
-    - "8080:80"
-    - "8443:443"   // SSL not currently implemented, coming soon...
+    - "8080:8080"
+    - "8443:8443"   // SSL not currently implemented, coming soon...
   volumes:
     - ./storage:/storage
 ```
