@@ -1,4 +1,4 @@
-FROM hpess/chef:latest
+FROM hpess/chef:master
 MAINTAINER Paul Cooke <paul.cooke@hp.com>, Karl Stoney <karl.stoney@hp.com>
 
 # Installed the stuff for building from source

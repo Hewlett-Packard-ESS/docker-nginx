@@ -1,5 +1,6 @@
-# hpess/ngninx
-This container builds on hpess/chef by adding nginx.
+![Nginx](/nginx.jpeg?raw=true "Nginx")
+
+This container builds on [hpess/chef](https://github.com/Hewlett-Packard-ESS/docker-chef) by adding nginx.
 
 ## Specifics
   - Nginx is build from source, and is using version 1.7.9 (Mainline).
@@ -14,7 +15,6 @@ nginx:
   hostname: 'nginx'
   image: hpess/nginx
   environment:
-    DEBUG: 'true'  // Used in HPESS images to give more information
     nginx_simple_http: 'true'
   ports:
     - "8080:8080"
@@ -24,4 +24,7 @@ nginx:
 ```
 
 ## License
-This application is distributed under the MIT License (MIT)
+This docker application is distributed under the MIT License (MIT).
+
+Nginx itself is licenced under the [Two Clause BSD-like](http://nginx.org/LICENSE) license.
+
