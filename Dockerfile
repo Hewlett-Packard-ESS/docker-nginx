@@ -2,11 +2,8 @@ FROM hpess/chef:master
 MAINTAINER Paul Cooke <paul.cooke@hp.com>, Karl Stoney <karl.stoney@hp.com>
 
 # Installed the stuff for building from source
-RUN yum -y install gcc gcc-c++ make zlib-devel pcre-devel openssl-devel && \
-    yum -y clean all
-
-# Build nginx from source
-RUN nginxVersion="1.7.9" && \
+RUN yum -y -q install gcc gcc-c++ make zlib-devel pcre-devel openssl-devel && \
+    nginxVersion="1.7.9" && \
     cd /usr/local/src && \
     wget --quiet http://nginx.org/download/nginx-$nginxVersion.tar.gz && \
     tar -xzf nginx-$nginxVersion.tar.gz && \
@@ -33,7 +30,9 @@ RUN nginxVersion="1.7.9" && \
       --without-http_fastcgi_module      && \
     make && \
     make install && \
-    rm -rf /usr/local/src/nginx*
+    rm -rf /usr/local/src/nginx* && \
+    yum -y -q autoremove gcc gcc-c++ make zlib-devel pcre-devel openssl-devel && \
+    yum -y -q clean all
 
 # Setup directories and ownership, as well as allowing nginx to bind to low ports
 RUN mkdir -p /var/log/nginx && \
