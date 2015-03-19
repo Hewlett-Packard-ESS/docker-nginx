@@ -1,1 +1,1 @@
-sudo docker build -t hpess/nginx:latest .
+docker build -t hpess/nginx:master .
